@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         socketHandler = new SocketHandler();
 
-        Parent root = FXMLLoader.load(getClass().getResource("views/createKahoot.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/main.fxml"));
         primaryStage.setTitle("Kahoot");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();

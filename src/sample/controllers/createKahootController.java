@@ -41,15 +41,17 @@ public class createKahootController  {
     @FXML
     public void selectQuestion(MouseEvent mouseEvent) {
         Question selectedQuestion = (Question) questionList.getSelectionModel().getSelectedItem();
-        selected = questionList.getItems().indexOf(selectedQuestion);
-        question.setText(selectedQuestion.getQuestion());
-        answerA.setText(selectedQuestion.getAnswerA());
-        answerB.setText(selectedQuestion.getAnswerB());
-        answerC.setText(selectedQuestion.getAnswerC());
-        answerD.setText(selectedQuestion.getAnswerD());
-        answer.getToggles().stream().filter(toggle -> toggle.toString().split("'")[1].equals(selectedQuestion.getCorrectAnswer())).forEach(toggle -> toggle.setSelected(true));
-        timeForQuestion.setText(Integer.toString(selectedQuestion.getTimeForAnswer()));
-        saveQuestion.setText("Modify Question");
+        if (selectedQuestion != null) {
+            selected = questionList.getItems().indexOf(selectedQuestion);
+            question.setText(selectedQuestion.getQuestion());
+            answerA.setText(selectedQuestion.getAnswerA());
+            answerB.setText(selectedQuestion.getAnswerB());
+            answerC.setText(selectedQuestion.getAnswerC());
+            answerD.setText(selectedQuestion.getAnswerD());
+            answer.getToggles().stream().filter(toggle -> toggle.toString().split("'")[1].equals(selectedQuestion.getCorrectAnswer())).forEach(toggle -> toggle.setSelected(true));
+            timeForQuestion.setText(Integer.toString(selectedQuestion.getTimeForAnswer()));
+            saveQuestion.setText("Modify Question");
+        }
     }
 
     @FXML
