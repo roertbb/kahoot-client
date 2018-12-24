@@ -20,24 +20,28 @@ public class SocketHandler {
         }
     }
 
-    public void sendMessage(String messageType, Object data) throws IOException {
+    public void sendMessage(String messageType, String data) {
 
         String message = null;
 
         switch(messageType) {
             case "CLOSE_CONNECTION":
-                message = "Disconnected";
+                message = "01|Disconnected";
                 break;
-            case "MESSAGE":
-                message = (String) data;
+            case "SEND_KAHOOT":
+                message = "02|" + data;
                 break;
             default:
                 System.out.println("Unrecognized message");
-                message = "Unrecognized message";
+                message = "99|Unrecognized message";
                 break;
         }
-        outputStreamWrite.write(message);
-        outputStreamWrite.flush();
+        try {
+            outputStreamWrite.write(message);
+            outputStreamWrite.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeConnection() throws IOException {
