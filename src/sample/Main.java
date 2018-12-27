@@ -24,7 +24,6 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 socketHandler.closeConnection();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

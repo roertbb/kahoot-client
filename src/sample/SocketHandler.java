@@ -42,6 +42,9 @@ public class SocketHandler {
             case "GET_ROOMS":
                 message = "03|";
                 break;
+            case "JOIN_ROOM":
+                message = "04|" + data;
+                break;
             default:
                 System.out.println("Unrecognized message");
                 message = "99|Unrecognized message";
