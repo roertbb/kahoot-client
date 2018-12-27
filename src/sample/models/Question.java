@@ -7,6 +7,7 @@ public class Question {
     private String answerC;
     private String answerD;
     private String correctAnswer;
+    private int timeForAnswer;
 
     public String getQuestion() {
         return question;
@@ -63,8 +64,6 @@ public class Question {
     public void setTimeForAnswer(int timeForAnswer) {
         this.timeForAnswer = timeForAnswer;
     }
-
-    private int timeForAnswer;
 
     public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, int timeForAnswer) {
         this.question = question;
