@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import sample.ScreenManager;
 import sample.models.Question;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +28,8 @@ public class CreateKahootController {
     @FXML private TextField timeForQuestion;
     @FXML private ToggleGroup answer;
     @FXML private Button saveQuestion;
+    @FXML private Button saveKahoot;
+    @FXML private Button loadKahoot;
 
     private ArrayList<Question> questions = new ArrayList<>();
     int selected = -1;
@@ -79,13 +83,53 @@ public class CreateKahootController {
         saveQuestion.setText("Add Question");
     }
 
-    @FXML public void loadKahoot(ActionEvent actionEvent) {
-        System.out.println(questions);
+    @FXML public void sendKahoot(ActionEvent actionEvent) {
+        List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "#" + question.getAnswerA() + "#"+ question.getAnswerB() + "#"+ question.getAnswerC() + "#"+ question.getAnswerD() + "#"+ question.getCorrectAnswer() + "#"+ question.getTimeForAnswer()).collect(Collectors.toList());
+        socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, "|"));
+        screenManager.setScreen("hostLobby", actionEvent);
     }
 
-    @FXML public void sendKahoot(ActionEvent actionEvent) {
-        List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "|" + question.getAnswerA() + "|"+ question.getAnswerB() + "|"+ question.getAnswerC() + "|"+ question.getAnswerD() + "|"+ question.getCorrectAnswer() + "|"+ question.getTimeForAnswer() + "|").collect(Collectors.toList());
-        socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, ""));
-        screenManager.setScreen("hostLobby", actionEvent);
+    @FXML
+    public void saveKahoot(ActionEvent actionEvent) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Choose location to save kahoot");
+        File selectedFile = null;
+        while (selectedFile == null) {
+            selectedFile = chooser.showSaveDialog(null);
+        }
+        File file = new File(String.valueOf(selectedFile));
+        PrintWriter outFile = null;
+        try {
+            outFile = new PrintWriter(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (Question question : questions) {
+            outFile.println(question.getQuestion() + "|" + question.getAnswerA()+ "|" +question.getAnswerB()+ "|" + question.getAnswerC()+ "|" + question.getAnswerD() + "|" +question.getCorrectAnswer()+ "|" + question.getTimeForAnswer());
+        }
+        outFile.close();
+        System.out.println("Kahhot saved");
+    }
+
+    @FXML
+    public void loadKahoot(ActionEvent actionEvent) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Choose kahhot to be loaded");
+        File file = chooser.showOpenDialog(null);
+        if (file != null) {
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                String line;
+                this.questions.clear();
+                while ((line = bufferedReader.readLine()) != null) {
+                    String [] data = line.split("\\|");
+                    this.questions.add(new Question(data[0],data[1],data[2],data[3],data[4],data[5],Integer.parseInt(data[6])));
+                }
+                questionList.setItems(FXCollections.observableArrayList(questions));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

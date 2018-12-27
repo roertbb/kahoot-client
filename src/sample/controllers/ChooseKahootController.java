@@ -30,7 +30,7 @@ public class ChooseKahootController {
     }
 
     public void updateListing(String [] data) {
-        String[] kahootIds = Arrays.copyOfRange(data, 1, data.length);
+        String[] kahootIds = Arrays.copyOfRange(data, 1, data.length-1);
         kahootListing.setItems(FXCollections.observableArrayList(kahootIds));
     }
 
@@ -47,7 +47,6 @@ public class ChooseKahootController {
     }
 
     public void joinKahootAck(String [] data) {
-        System.out.println(data[1]);
         if (data[1].equals("success")) {
             screenManager.setScreen("lobby", this.current);
         }
