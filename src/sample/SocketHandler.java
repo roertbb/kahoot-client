@@ -7,14 +7,22 @@ import java.net.Socket;
 
 public class SocketHandler {
     private Socket socket;
-    private OutputStreamWriter outputStreamWrite;
+    private OutputStreamWriter outputStreamWriter;
     private InputStreamReader inputStreamReader;
+    public Receiver receiver;
+    private Thread t;
+
+    public InputStreamReader getInputStreamReader() { return this.inputStreamReader; }
 
     SocketHandler() {
         try {
             socket = new Socket("127.0.0.1",1234);
-            outputStreamWrite = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+            outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             inputStreamReader = new InputStreamReader(socket.getInputStream(), "UTF-8");
+            receiver = new Receiver();
+            this.t = new Thread(receiver);
+            this.t.setDaemon(true);
+            this.t.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,8 +48,8 @@ public class SocketHandler {
                 break;
         }
         try {
-            outputStreamWrite.write(message);
-            outputStreamWrite.flush();
+            outputStreamWriter.write(message);
+            outputStreamWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +60,7 @@ public class SocketHandler {
         String [] data = new String[0];
         try {
             inputStreamReader.read(buffer);
-            data = String.valueOf(buffer).split("|");
+            data = String.valueOf(buffer).split("\\|");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,9 +70,10 @@ public class SocketHandler {
     public void closeConnection() throws IOException {
         this.sendMessage("CLOSE_CONNECTION", null);
         System.out.println("Closing connection");
+        receiver.setRunning(false);
         inputStreamReader.close();
-        outputStreamWrite.close();
-        socket.close();
+        outputStreamWriter.close();
+        System.out.println(t.isAlive());
     }
 
 }

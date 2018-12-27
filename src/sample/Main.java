@@ -11,12 +11,10 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static SocketHandler socketHandler;
-    public static Receiver receiver;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         socketHandler = new SocketHandler();
-        receiver = new Receiver();
 
         Parent root = FXMLLoader.load(getClass().getResource("views/main.fxml"));
         primaryStage.setTitle("Kahoot");
@@ -26,6 +24,7 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 socketHandler.closeConnection();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
