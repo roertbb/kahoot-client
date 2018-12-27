@@ -10,15 +10,13 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static SocketHandler socketHandler;
-
-    public static SocketHandler getSocketHandler() {
-        return socketHandler;
-    }
+    public static SocketHandler socketHandler;
+    public static Receiver receiver;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         socketHandler = new SocketHandler();
+        receiver = new Receiver();
 
         Parent root = FXMLLoader.load(getClass().getResource("views/main.fxml"));
         primaryStage.setTitle("Kahoot");

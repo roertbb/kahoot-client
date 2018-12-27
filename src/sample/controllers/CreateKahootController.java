@@ -6,15 +6,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import sample.ScreenManager;
 import sample.models.Question;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static sample.Main.getSocketHandler;
+import static sample.Main.socketHandler;
 
-public class createKahootController  {
+public class CreateKahootController {
 
     @FXML public ListView questionList;
     @FXML private TextArea question;
@@ -28,6 +29,8 @@ public class createKahootController  {
 
     private ArrayList<Question> questions = new ArrayList<>();
     int selected = -1;
+
+    private ScreenManager screenManager = new ScreenManager();
 
     @FXML
     public void AddNewQuestion(ActionEvent actionEvent) throws IOException {
@@ -82,6 +85,7 @@ public class createKahootController  {
 
     @FXML public void sendKahoot(ActionEvent actionEvent) {
         List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "|" + question.getAnswerA() + "|"+ question.getAnswerB() + "|"+ question.getAnswerC() + "|"+ question.getAnswerD() + "|"+ question.getCorrectAnswer() + "|"+ question.getTimeForAnswer() + "|").collect(Collectors.toList());
-        getSocketHandler().sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, ""));
+        socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, ""));
+        screenManager.setScreen("hostLobby", actionEvent);
     }
 }

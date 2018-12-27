@@ -31,6 +31,9 @@ public class SocketHandler {
             case "SEND_KAHOOT":
                 message = "02|" + data;
                 break;
+            case "GET_ROOMS":
+                message = "03|";
+                break;
             default:
                 System.out.println("Unrecognized message");
                 message = "99|Unrecognized message";
@@ -42,6 +45,18 @@ public class SocketHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String[] receiveMessage() {
+        char buffer[] = new char[1024];
+        String [] data = new String[0];
+        try {
+            inputStreamReader.read(buffer);
+            data = String.valueOf(buffer).split("|");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     public void closeConnection() throws IOException {
