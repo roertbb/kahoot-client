@@ -10,11 +10,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static SocketHandler socketHandler;
-
-    public static SocketHandler getSocketHandler() {
-        return socketHandler;
-    }
+    public static SocketHandler socketHandler;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
