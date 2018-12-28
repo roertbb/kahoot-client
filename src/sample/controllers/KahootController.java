@@ -39,6 +39,7 @@ public class KahootController {
 
     public void receivedQuestion(String [] data) {
         String [] processedData = data[1].split("#");
+        this.question.setWrapText(true);
         this.question.setText(processedData[0]);
         this.answerA.setText(processedData[1]);
         this.answerB.setText(processedData[2]);
@@ -53,5 +54,15 @@ public class KahootController {
         this.overlayLabel.setText("Answer send... waiting for other players ;)");
         this.overlayPane.setVisible(true);
         this.questionPane.setVisible(false);
+    }
+
+    public void receivedAnswer(String[] data) {
+        this.overlayPane.setVisible(true);
+        this.questionPane.setVisible(false);
+        this.overlayLabel.setText(data[1]);
+    }
+
+    public void prepareQuestion(String[] data) {
+        this.overlayLabel.setText("Prepare before next question...");
     }
 }

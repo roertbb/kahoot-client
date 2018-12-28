@@ -77,7 +77,24 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> kahootController.receivedQuestion(data));
                     }
                     if (hostKahootController!=null) {
-                        hostKahootController.receivedQuestion(data);
+                        Platform.runLater(() -> hostKahootController.receivedQuestion(data));
+                    }
+                }
+                // receive information if answer was correct/incorrect
+                else if (data[0].equals("08")) {
+                    if (kahootController!=null) {
+                        Platform.runLater(() -> kahootController.receivedAnswer(data));
+                    }
+                    if (hostKahootController!=null) {
+                        //Platform.runLater(() -> hostKahootController.receivedAnswer(data));
+                    }
+                }
+                else if (data[0].equals("09")) {
+                    if (kahootController!=null) {
+                        Platform.runLater(() -> kahootController.prepareQuestion(data));
+                    }
+                    if (hostKahootController!=null) {
+                        //Platform.runLater(() -> hostKahootController.receivedAnswer(data));
                     }
                 }
             }
