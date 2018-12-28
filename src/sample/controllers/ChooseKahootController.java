@@ -37,17 +37,16 @@ public class ChooseKahootController {
     public void joinKahoot(ActionEvent actionEvent) {
         String roomId = (this.kahootListing.getSelectionModel().getSelectedItems()).toString();
         roomId = roomId.replace("[","").replace("]","");
-        System.out.println(roomId);
         String pin = this.pin.getText();
         String nick = this.nick.getText();
         if (roomId != null && pin != null && nick != null) {
-            current = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             socketHandler.sendMessage("JOIN_ROOM",roomId + "|" + pin + "|" + nick + "|");
         }
     }
 
     public void joinKahootAck(String [] data) {
         if (data[1].equals("success")) {
+            this.current = (Stage) kahootListing.getScene().getWindow();
             screenManager.setScreen("lobby", this.current);
         }
     }

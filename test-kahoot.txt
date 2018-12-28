@@ -1,2 +1,2 @@
-Some months have 31 days, and some months have 30 days. But how many have 28 days?|0|1|2|12|D|30
-You are participating in a race. You've just passed the second person. What position are you now in?|1st|2nd|3rd|I'm potato!|B|30
+Some months have 31 days, and some months have 30 days. But how many have 28 days?|0|1|2|12|D|10
+You are participating in a race. You've just passed the second person. What position are you now in?|1st|2nd|3rd|I'm potato!|B|10

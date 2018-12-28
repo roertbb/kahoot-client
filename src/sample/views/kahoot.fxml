@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.KahootController">
+   <children>
+      <Pane fx:id="questionPane" prefHeight="400.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="answerA" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" onAction="#clickedAnswerA" prefHeight="25.0" prefWidth="283.0" text="Button" />
+            <Button fx:id="answerB" layoutX="303.0" layoutY="269.0" mnemonicParsing="false" onAction="#clickedAnswerB" prefHeight="25.0" prefWidth="283.0" text="Button" />
+            <Button fx:id="answerC" layoutX="15.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickedAnswerC" prefHeight="25.0" prefWidth="283.0" text="Button" />
+            <Button fx:id="answerD" layoutX="303.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickedAnswerD" prefHeight="25.0" prefWidth="283.0" text="Button" />
+            <Label fx:id="question" alignment="CENTER" layoutX="15.0" layoutY="125.0" prefHeight="129.0" prefWidth="571.0" text="Label" wrapText="true" />
+         </children>
+      </Pane>
+      <Pane fx:id="overlayPane" layoutX="15.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" translateZ="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="overlayLabel" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" text="Preparing kahoot..." wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

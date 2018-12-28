@@ -109,7 +109,6 @@ public class CreateKahootController {
             outFile.println(question.getQuestion() + "|" + question.getAnswerA()+ "|" +question.getAnswerB()+ "|" + question.getAnswerC()+ "|" + question.getAnswerD() + "|" +question.getCorrectAnswer()+ "|" + question.getTimeForAnswer());
         }
         outFile.close();
-        System.out.println("Kahhot saved");
     }
 
     @FXML

@@ -30,12 +30,7 @@ public class ScreenManager {
 
         if (newScene != null) {
             Parent finalNewScene = newScene;
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    current.setScene(new Scene(finalNewScene));
-                }
-            });
+            Platform.runLater(() -> current.setScene(new Scene(finalNewScene)));
         }
     }
 }
