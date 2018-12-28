@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sample.ScreenManager;
 
 import java.io.IOException;
@@ -13,10 +15,12 @@ import java.util.Arrays;
 import static sample.Main.socketHandler;
 
 public class HostLobbyController {
+    @FXML AnchorPane panel;
     @FXML ListView playersListing;
     @FXML Button start;
 
     private ScreenManager screenManager = new ScreenManager();
+    private Stage stage;
 
     public void initialize() {
         socketHandler.receiver.setChooseKahootController(null);
@@ -30,5 +34,10 @@ public class HostLobbyController {
 
     public void startKahoot(ActionEvent actionEvent) throws IOException {
         socketHandler.sendMessage("START_KAHOOT",null);
+    }
+
+    public void startKahootAck() {
+        this.stage = (Stage) panel.getScene().getWindow();
+        screenManager.setScreen("hostKahoot", this.stage);
     }
 }
