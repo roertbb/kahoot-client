@@ -45,6 +45,9 @@ public class SocketHandler {
             case "JOIN_ROOM":
                 message = "04|" + data;
                 break;
+            case "START_KAHOOT":
+                message = "05|";
+                break;
             default:
                 System.out.println("Unrecognized message");
                 message = "99|Unrecognized message";

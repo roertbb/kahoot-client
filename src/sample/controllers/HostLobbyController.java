@@ -30,6 +30,5 @@ public class HostLobbyController {
 
     public void startKahoot(ActionEvent actionEvent) throws IOException {
         socketHandler.sendMessage("START_KAHOOT",null);
-        //screenManager.setScreen("");
     }
 }

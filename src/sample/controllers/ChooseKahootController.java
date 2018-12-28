@@ -37,7 +37,6 @@ public class ChooseKahootController {
     public void joinKahoot(ActionEvent actionEvent) {
         String roomId = (this.kahootListing.getSelectionModel().getSelectedItems()).toString();
         roomId = roomId.replace("[","").replace("]","");
-        System.out.println(roomId);
         String pin = this.pin.getText();
         String nick = this.nick.getText();
         if (roomId != null && pin != null && nick != null) {

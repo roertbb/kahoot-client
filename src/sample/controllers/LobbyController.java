@@ -17,7 +17,6 @@ public class LobbyController {
 
     public void updateUsersList(String [] data) {
         String[] playersNicks = Arrays.copyOfRange(data, 1, data.length-1);
-        System.out.println(playersNicks);
         playersListing.setItems(FXCollections.observableArrayList(playersNicks));
     }
 }
