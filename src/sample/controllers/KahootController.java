@@ -107,7 +107,12 @@ public class KahootController {
     public void prepareQuestion(String[] data) {
         this.answerChart.setVisible(false);
         this.answerLabel.setVisible(false);
-        this.overlayLabel.setText("Prepare before next question...");
+        if (data.length == 2) {
+            this.overlayLabel.setText("Prepare before next question...");
+        } else {
+            this.overlayLabel.setText("It was last question, you are...");
+            // show move to menu button
+        }
         this.overlayLabel.setVisible(true);
     }
 }

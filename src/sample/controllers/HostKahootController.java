@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.util.Arrays;
@@ -16,6 +18,9 @@ public class HostKahootController {
 
     @FXML ListView points;
     @FXML BarChart answerChart;
+    @FXML ListView log;
+    @FXML Label status;
+    @FXML Button exit;
 
     HashMap<String,Integer> answers;
 
@@ -34,21 +39,24 @@ public class HostKahootController {
     }
 
     public void receivedQuestion(String [] data) {
-        System.out.println(data);
+        this.status.setText("Status: Users got question, they're answering");
     }
 
     public void summarizeQuestion(String[] data) {
-        // after all clients send answers
+        this.status.setText("Status: Question finished");
     }
 
     public void receiveAnswer(String[] data) {
-        System.out.println("len - " +  data.length);
-        answers.replace(data[1],answers.get(data[1])+1);
+        // add notification to log
+        log.getItems().add("User " + data[1] + " answered " + data[2] + " which is " + (data.length > 5 ? "correct" : "incorrect") + " within " + data[3] + " seconds");
 
         // refresh list with points if exists
-        if (data.length > 3) {
-            points.setItems(FXCollections.observableArrayList(Arrays.copyOfRange(data,3,data.length-1)));
+        if (data.length > 5) {
+            points.setItems(FXCollections.observableArrayList(Arrays.copyOfRange(data,4,data.length-1)));
         }
+
+        // update chart data
+        answers.replace(data[2],answers.get(data[2])+1);
 
         // update chart
         XYChart.Series series = new XYChart.Series();
@@ -61,6 +69,7 @@ public class HostKahootController {
     }
 
     public void clearData(String[] data) {
+        this.status.setText("Status: Preparing before question");
         this.initializeHashMap();
         answerChart.getData().clear();
         answerChart.layout();
