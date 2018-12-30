@@ -21,6 +21,7 @@ public class LobbyController {
     public void initialize() {
         socketHandler.receiver.setChooseKahootController(null);
         socketHandler.receiver.setLobbyController(this);
+        socketHandler.sendMessage("REQUEST_ROOM_MEMBERS",null);
     }
 
     public void updateUsersList(String [] data) {
