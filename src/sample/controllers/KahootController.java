@@ -7,6 +7,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sample.ScreenManager;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,6 +27,9 @@ public class KahootController {
     @FXML Button answerD;
     @FXML BarChart answerChart;
     @FXML Label answerLabel;
+    @FXML Button exit;
+
+    private ScreenManager screenManager = new ScreenManager();
 
     public void initialize() {
         socketHandler.receiver.setLobbyController(null);
@@ -110,9 +114,13 @@ public class KahootController {
         if (data.length == 2) {
             this.overlayLabel.setText("Prepare before next question...");
         } else {
-            this.overlayLabel.setText("It was last question, you are...");
-            // show move to menu button
+            this.overlayLabel.setText("It was last question, you are " + data[2] + " and you got " + data[3] + " points");
+            this.exit.setVisible(true);
         }
         this.overlayLabel.setVisible(true);
+    }
+
+    public void exitKahoot(ActionEvent actionEvent) {
+        screenManager.setScreen("main",actionEvent);
     }
 }

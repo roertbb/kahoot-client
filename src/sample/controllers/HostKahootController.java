@@ -1,12 +1,14 @@
 package sample.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import sample.ScreenManager;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,6 +25,8 @@ public class HostKahootController {
     @FXML Button exit;
 
     HashMap<String,Integer> answers;
+
+    private ScreenManager screenManager = new ScreenManager();
 
     public void initialize() {
         socketHandler.receiver.setHostLobbyController(null);
@@ -69,9 +73,18 @@ public class HostKahootController {
     }
 
     public void clearData(String[] data) {
-        this.status.setText("Status: Preparing before question");
-        this.initializeHashMap();
-        answerChart.getData().clear();
-        answerChart.layout();
+        if (data.length > 2) {
+            this.status.setText("Status: Kahoot is finished - take a look at results");
+            this.exit.setVisible(true);
+        } else {
+            this.status.setText("Status: Preparing before question");
+            this.initializeHashMap();
+            answerChart.getData().clear();
+            answerChart.layout();
+        }
+    }
+
+    public void exitKahoot(ActionEvent actionEvent) {
+        screenManager.setScreen("main",actionEvent);
     }
 }
