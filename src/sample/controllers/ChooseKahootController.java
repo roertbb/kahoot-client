@@ -30,7 +30,7 @@ public class ChooseKahootController {
     }
 
     public void updateListing(String [] data) {
-        String[] kahootIds = Arrays.copyOfRange(data, 1, data.length-1);
+        String[] kahootIds = Arrays.copyOfRange(data, 1, data.length);
         kahootListing.setItems(FXCollections.observableArrayList(kahootIds));
     }
 

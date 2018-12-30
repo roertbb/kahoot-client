@@ -34,7 +34,7 @@ public class SocketHandler {
 
         switch(messageType) {
             case "CLOSE_CONNECTION":
-                message = "01|Disconnected";
+                message = "01|";
                 break;
             case "SEND_KAHOOT":
                 message = "02|" + data;
@@ -60,6 +60,8 @@ public class SocketHandler {
                 break;
         }
         try {
+            outputStreamWriter.write(String.format("%04d", message.length()));
+            outputStreamWriter.flush();
             outputStreamWriter.write(message);
             outputStreamWriter.flush();
         } catch (IOException e) {
@@ -68,9 +70,11 @@ public class SocketHandler {
     }
 
     public String[] receiveMessage() {
-        char buffer[] = new char[1024];
         String [] data = new String[0];
         try {
+            char msgSize[] = new char[4];
+            inputStreamReader.read(msgSize);
+            char buffer[] = new char[Integer.parseInt(new String(msgSize))];
             inputStreamReader.read(buffer);
             data = String.valueOf(buffer).split("\\|");
         } catch (IOException e) {

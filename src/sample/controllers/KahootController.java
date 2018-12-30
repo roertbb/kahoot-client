@@ -62,7 +62,7 @@ public class KahootController {
     }
 
     public void sendAnswer(String answer) {
-        socketHandler.sendMessage("SEND_ANSWER", answer);
+        socketHandler.sendMessage("SEND_ANSWER", answer+"|");
         this.overlayLabel.setText("Answer send... waiting for other players ;)");
         this.overlayLabel.setVisible(true);
         this.answerLabel.setVisible(false);
@@ -82,7 +82,7 @@ public class KahootController {
         answers.put("B",0);
         answers.put("C",0);
         answers.put("D",0);
-        String [] answersData = Arrays.copyOfRange(data,3,data.length-1);
+        String [] answersData = Arrays.copyOfRange(data,3,data.length);
         for (String s : answersData) {
             String [] entry = s.split(":");
             answers.replace(entry[0],Integer.valueOf(entry[1]));
@@ -111,7 +111,7 @@ public class KahootController {
     public void prepareQuestion(String[] data) {
         this.answerChart.setVisible(false);
         this.answerLabel.setVisible(false);
-        if (data.length == 2) {
+        if (data.length == 1 ) {
             this.overlayLabel.setText("Prepare before next question...");
         } else {
             this.overlayLabel.setText("It was last question, you are " + data[2] + " and you got " + data[3] + " points");
