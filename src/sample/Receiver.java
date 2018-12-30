@@ -56,19 +56,19 @@ public class Receiver implements Runnable {
                 // receive players in room
                 else if (data[0].equals("05")) {
                     if (lobbyController!=null) {
-                        lobbyController.updateUsersList(data);
+                        Platform.runLater(() -> lobbyController.updateUsersList(data));
                     }
                     if (hostLobbyController!=null) {
-                        hostLobbyController.updateUsersList(data);
+                        Platform.runLater(() -> hostLobbyController.updateUsersList(data));
                     }
                 }
                 // start kahoot
                 else if (data[0].equals("06")) {
                     if (lobbyController!=null) {
-                        lobbyController.startKahootAck();
+                        Platform.runLater(() -> lobbyController.startKahootAck());
                     }
                     if (hostLobbyController!=null) {
-                        hostLobbyController.startKahootAck();
+                        Platform.runLater(() -> hostLobbyController.startKahootAck());
                     }
                 }
                 // receive question
@@ -86,7 +86,7 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> kahootController.receivedAnswer(data));
                     }
                     if (hostKahootController!=null) {
-                        //Platform.runLater(() -> hostKahootController.receivedAnswer(data));
+                        Platform.runLater(() -> hostKahootController.summarizeQuestion(data));
                     }
                 }
                 else if (data[0].equals("09")) {
@@ -94,7 +94,12 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> kahootController.prepareQuestion(data));
                     }
                     if (hostKahootController!=null) {
-                        //Platform.runLater(() -> hostKahootController.receivedAnswer(data));
+                        Platform.runLater(() -> hostKahootController.clearData(data));
+                    }
+                }
+                else if (data[0].equals("10")) {
+                    if (hostKahootController!=null) {
+                        Platform.runLater(() -> hostKahootController.receiveAnswer(data));
                     }
                 }
             }

@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.controllers.HostKahootController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.HostKahootController">
+   <children>
+      <BarChart fx:id="answerChart" animated="false" layoutX="239.0" layoutY="69.0" prefHeight="241.0" prefWidth="387.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis animated="false" minorTickCount="1" side="LEFT" upperBound="1.0" />
+        </yAxis>
+      </BarChart>
+      <ListView fx:id="points" layoutX="14.0" layoutY="69.0" prefHeight="241.0" prefWidth="206.0" />
+      <ListView fx:id="log" layoutX="14.0" layoutY="338.0" prefHeight="128.0" prefWidth="611.0" />
+      <Label fx:id="status" alignment="CENTER" layoutX="106.0" layoutY="14.0" prefHeight="15.0" prefWidth="428.0" text="Status: Preparing before question" />
+      <Button fx:id="exit" layoutX="583.0" layoutY="9.0" mnemonicParsing="false" text="Exit" visible="false" />
+      <Label layoutX="14.0" layoutY="47.0" text="Currect score:" />
+      <Label layoutX="256.0" layoutY="47.0" prefHeight="15.0" prefWidth="206.0" text="Answers for current question:" />
+      <Label layoutX="14.0" layoutY="317.0" prefHeight="15.0" prefWidth="31.0" text="Log:" />
+   </children>
 </AnchorPane>
