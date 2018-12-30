@@ -33,4 +33,9 @@ public class LobbyController {
         this.stage = (Stage) panel.getScene().getWindow();
         screenManager.setScreen("kahoot", this.stage);
     }
+
+    public void ownerDisconnected() {
+        Stage stage = (Stage) panel.getScene().getWindow();
+        screenManager.setScreen("main",stage);
+    }
 }

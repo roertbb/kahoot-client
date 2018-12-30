@@ -44,13 +44,13 @@ public class Receiver implements Runnable {
                 // kahoots listing
                 if (data[0].equals("03")) {
                     if (chooseKahootController!=null) {
-                        chooseKahootController.updateListing(data);
+                        Platform.runLater(() -> chooseKahootController.updateListing(data));
                     }
                 }
                 // join room ack
                 else if (data[0].equals("04")) {
                     if (chooseKahootController!=null) {
-                        chooseKahootController.joinKahootAck(data);
+                        Platform.runLater(() -> chooseKahootController.joinKahootAck(data));
                     }
                 }
                 // receive players in room
@@ -102,9 +102,13 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> hostKahootController.receiveAnswer(data));
                     }
                 }
+                else if (data[0].equals("11")) {
+                    if (lobbyController!=null) {
+                        Platform.runLater(() -> lobbyController.ownerDisconnected());
+                    }
+                }
             }
         } catch (Exception e) {
-            Thread.currentThread().interrupt();
             this.setRunning(false);
             System.out.println("RECEIVER EXCEPTION");
             e.printStackTrace();

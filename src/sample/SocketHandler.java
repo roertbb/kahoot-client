@@ -87,9 +87,10 @@ public class SocketHandler {
         this.sendMessage("CLOSE_CONNECTION", null);
         System.out.println("Closing connection");
         receiver.setRunning(false);
-        inputStreamReader.close();
+        socket.close();
         outputStreamWriter.close();
-        System.out.println(t.isAlive());
+        inputStreamReader.close();
+        t.interrupt();
     }
 
 }
