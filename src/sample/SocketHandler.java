@@ -74,9 +74,11 @@ public class SocketHandler {
         try {
             char msgSize[] = new char[4];
             inputStreamReader.read(msgSize);
-            char buffer[] = new char[Integer.parseInt(new String(msgSize))];
-            inputStreamReader.read(buffer);
-            data = String.valueOf(buffer).split("\\|");
+            if (!msgSize.equals("    ")) {
+                char buffer[] = new char[Integer.parseInt(new String(msgSize))];
+                inputStreamReader.read(buffer);
+                data = String.valueOf(buffer).split("\\|");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

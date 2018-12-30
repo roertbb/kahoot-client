@@ -102,7 +102,7 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> hostKahootController.receiveAnswer(data));
                     }
                 }
-                else if (data[0].equals("11")) {
+                else if (data[0].equals("12")) {
                     if (lobbyController!=null) {
                         Platform.runLater(() -> lobbyController.ownerDisconnected());
                     }

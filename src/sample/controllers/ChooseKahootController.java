@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ import sample.ScreenManager;
 
 import java.util.Arrays;
 
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.length;
 import static sample.Main.socketHandler;
 
 public class ChooseKahootController {
@@ -23,6 +25,7 @@ public class ChooseKahootController {
     @FXML Button choose;
     @FXML TextField nick;
     @FXML TextField pin;
+    @FXML Label warning;
 
     public void initialize() {
         socketHandler.sendMessage("GET_ROOMS",null);
@@ -36,18 +39,25 @@ public class ChooseKahootController {
 
     public void joinKahoot(ActionEvent actionEvent) {
         String roomId = (this.kahootListing.getSelectionModel().getSelectedItems()).toString();
-        roomId = roomId.replace("[","").replace("]","");
+        String parsedRoomId = roomId.replace("[","").replace("]","");
         String pin = this.pin.getText();
         String nick = this.nick.getText();
-        if (roomId != null && pin != null && nick != null) {
-            socketHandler.sendMessage("JOIN_ROOM",roomId + "|" + pin + "|" + nick + "|");
-        }
+        if (parsedRoomId.length() == 0)
+            this.warning.setText("Choose room from above");
+        else if (pin.length() == 0)
+            this.warning.setText("Enter pin");
+        else if (nick.length() == 0)
+            this.warning.setText("Enter nick");
+        else
+            socketHandler.sendMessage("JOIN_ROOM",parsedRoomId + "|" + pin + "|" + nick + "|");
     }
 
     public void joinKahootAck(String [] data) {
         if (data[1].equals("success")) {
             this.current = (Stage) kahootListing.getScene().getWindow();
             screenManager.setScreen("lobby", this.current);
+        } else {
+            this.warning.setText("Incorrect pin");
         }
     }
 }
