@@ -89,6 +89,7 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> hostKahootController.summarizeQuestion(data));
                     }
                 }
+                // prepare before next question
                 else if (data[0].equals("09")) {
                     if (kahootController!=null) {
                         Platform.runLater(() -> kahootController.prepareQuestion(data));
@@ -97,6 +98,7 @@ public class Receiver implements Runnable {
                         Platform.runLater(() -> hostKahootController.clearData(data));
                     }
                 }
+                // host receiving answer
                 else if (data[0].equals("10")) {
                     if (hostKahootController!=null) {
                         Platform.runLater(() -> hostKahootController.receiveAnswer(data));

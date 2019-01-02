@@ -56,7 +56,10 @@ public class ChooseKahootController {
         if (data[1].equals("success")) {
             this.current = (Stage) kahootListing.getScene().getWindow();
             screenManager.setScreen("lobby", this.current);
-        } else {
+        } else if (data[1].equals("nick is not unique")) {
+            this.warning.setText("User with such a nick already exists");
+        }
+        else if (data[1].equals(("incorrect pin"))){
             this.warning.setText("Incorrect pin");
         }
     }
