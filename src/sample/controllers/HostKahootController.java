@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.ScreenManager;
+import sample.SocketHandler;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,9 +56,8 @@ public class HostKahootController {
         log.getItems().add("User " + data[1] + " answered " + data[2] + " which is " + (data.length > 5 ? "correct" : "incorrect") + " within " + data[3] + " seconds");
 
         // refresh list with points if exists
-        if (data.length > 5) {
+        if (data.length > 5)
             points.setItems(FXCollections.observableArrayList(Arrays.copyOfRange(data,4,data.length)));
-        }
 
         // update chart data
         answers.replace(data[2],answers.get(data[2])+1);
@@ -85,6 +85,7 @@ public class HostKahootController {
     }
 
     public void exitKahoot(ActionEvent actionEvent) {
+        socketHandler.receiver.setHostKahootController(null);
         screenManager.setScreen("main",actionEvent);
     }
 }

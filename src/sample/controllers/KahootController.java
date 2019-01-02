@@ -7,6 +7,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sample.Receiver;
 import sample.ScreenManager;
 
 import java.util.Arrays;
@@ -122,6 +123,7 @@ public class KahootController {
     }
 
     public void exitKahoot(ActionEvent actionEvent) {
+        socketHandler.receiver.setKahootController(null);
         screenManager.setScreen("main",actionEvent);
     }
 }

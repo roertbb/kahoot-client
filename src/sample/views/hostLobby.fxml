@@ -6,10 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="panel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.HostLobbyController">
+<AnchorPane fx:id="panel" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.HostLobbyController">
    <children>
-      <Label layoutX="280.0" layoutY="14.0" text="Lobby" />
-      <ListView fx:id="playersListing" layoutX="20.0" layoutY="38.0" prefHeight="314.0" prefWidth="563.0" />
-      <Button fx:id="start" layoutX="250.0" layoutY="361.0" mnemonicParsing="false" onAction="#startKahoot" text="Start Kahoot" />
+      <Label layoutX="300.0" layoutY="14.0" text="Lobby" />
+      <ListView fx:id="playersListing" layoutX="20.0" layoutY="38.0" prefHeight="392.0" prefWidth="597.0" />
+      <Button fx:id="start" layoutX="270.0" layoutY="441.0" mnemonicParsing="false" onAction="#startKahoot" text="Start Kahoot" />
    </children>
 </AnchorPane>
