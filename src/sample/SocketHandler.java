@@ -1,9 +1,8 @@
 package sample;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class SocketHandler {
     private Socket socket;
@@ -15,8 +14,9 @@ public class SocketHandler {
     public InputStreamReader getInputStreamReader() { return this.inputStreamReader; }
 
     SocketHandler() {
+        ArrayList<String> server_data = this.readConfig();
         try {
-            socket = new Socket("127.0.0.1",1234);
+            socket = new Socket(server_data.get(0),Integer.parseInt(server_data.get(1)));
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             inputStreamReader = new InputStreamReader(socket.getInputStream(), "UTF-8");
             receiver = new Receiver();
@@ -77,7 +77,7 @@ public class SocketHandler {
         try {
             char msgSize[] = new char[4];
             inputStreamReader.read(msgSize);
-            if (!msgSize.equals("    ")) {
+            if (msgSize[0] != 0) {
                 char buffer[] = new char[Integer.parseInt(new String(msgSize))];
                 inputStreamReader.read(buffer);
                 data = String.valueOf(buffer).split("\\|");
@@ -88,13 +88,33 @@ public class SocketHandler {
         return data;
     }
 
+    private ArrayList<String> readConfig() {
+        BufferedReader in = null;
+        ArrayList<String> data = null;
+        try {
+            in = new BufferedReader(new FileReader(".env"));
+            data = new ArrayList<>();
+            String str;
+            while ((str = in.readLine()) != null)
+                data.add(str);
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Couldn't find config file");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     public void closeConnection() throws IOException {
         this.sendMessage("CLOSE_CONNECTION", null);
         System.out.println("Closing connection");
         receiver.setRunning(false);
+        //outputStreamWriter.close();
+        //inputStreamReader.close();
+        socket.shutdownOutput();
+        socket.shutdownInput();
         socket.close();
-        outputStreamWriter.close();
-        inputStreamReader.close();
         t.interrupt();
     }
 
