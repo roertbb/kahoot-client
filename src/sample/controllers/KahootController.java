@@ -34,6 +34,7 @@ public class KahootController {
     public void initialize() {
         socketHandler.receiver.setLobbyController(null);
         socketHandler.receiver.setKahootController(this);
+        socketHandler.sendMessage("CHECK_IF_ALREADY_STARTED",null);
     }
 
     public void clickedAnswerA(ActionEvent actionEvent) {

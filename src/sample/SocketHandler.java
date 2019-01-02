@@ -54,6 +54,9 @@ public class SocketHandler {
             case "REQUEST_ROOM_MEMBERS":
                 message = "11|";
                 break;
+            case "CHECK_IF_ALREADY_STARTED":
+                message = "13|";
+                break;
             default:
                 System.out.println("Unrecognized message");
                 message = "99|Unrecognized message";
