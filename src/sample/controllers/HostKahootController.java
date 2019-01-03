@@ -56,7 +56,7 @@ public class HostKahootController {
         log.getItems().add("User " + data[1] + " answered " + data[2] + " which is " + (data.length > 5 ? "correct" : "incorrect") + " within " + data[3] + " seconds");
 
         // refresh list with points if exists
-        if (data.length > 5)
+        if (data.length > 4)
             points.setItems(FXCollections.observableArrayList(Arrays.copyOfRange(data,4,data.length)));
 
         // update chart data
