@@ -55,7 +55,7 @@ public class Receiver implements Runnable {
                         }
                     }
                     // receive players in room
-                    else if (data[0].equals("05")) {
+                    else if (data[0].equals("14")) {
                         if (lobbyController!=null) {
                             Platform.runLater(() -> lobbyController.updateUsersList(data));
                         }
