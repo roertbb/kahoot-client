@@ -8,6 +8,7 @@ public class SocketHandler {
     private Socket socket;
     private OutputStreamWriter outputStreamWriter;
     private InputStreamReader inputStreamReader;
+    private BufferedReader br;
     public Receiver receiver;
     private Thread t;
 
@@ -19,6 +20,7 @@ public class SocketHandler {
             socket = new Socket(server_data.get(0),Integer.parseInt(server_data.get(1)));
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             inputStreamReader = new InputStreamReader(socket.getInputStream(), "UTF-8");
+            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             receiver = new Receiver();
             this.t = new Thread(receiver);
             this.t.setDaemon(true);
@@ -63,9 +65,9 @@ public class SocketHandler {
                 break;
         }
         try {
-            outputStreamWriter.write(String.format("%04d", message.length()));
-            outputStreamWriter.flush();
-            outputStreamWriter.write(message);
+            //outputStreamWriter.write(String.format("%04d", message.length()));
+            //outputStreamWriter.flush();
+            outputStreamWriter.write(message+"\n");
             outputStreamWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,18 +76,14 @@ public class SocketHandler {
 
     public String[] receiveMessage() {
         String [] data = new String[0];
+
+        String line="";
         try {
-            char msgSize[] = new char[4];
-            inputStreamReader.read(msgSize);
-            if (msgSize[0] != 0) {
-                char buffer[] = new char[Integer.parseInt(new String(msgSize))];
-                inputStreamReader.read(buffer);
-                data = String.valueOf(buffer).split("\\|");
-            }
+            line = br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return data;
+        return line.split("\\|");
     }
 
     private ArrayList<String> readConfig() {
