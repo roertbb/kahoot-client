@@ -1,7 +1,9 @@
 package sample;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 public class SocketHandler {
@@ -12,12 +14,10 @@ public class SocketHandler {
     public Receiver receiver;
     private Thread t;
 
-    public InputStreamReader getInputStreamReader() { return this.inputStreamReader; }
-
     SocketHandler() {
         ArrayList<String> server_data = this.readConfig();
         try {
-            socket = new Socket(server_data.get(0),Integer.parseInt(server_data.get(1)));
+            socket = new Socket(server_data.get(0), Integer.parseInt(server_data.get(1)));
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             inputStreamReader = new InputStreamReader(socket.getInputStream(), "UTF-8");
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -25,8 +25,12 @@ public class SocketHandler {
             this.t = new Thread(receiver);
             this.t.setDaemon(true);
             this.t.start();
+        } catch (ConnectException e) {
+            System.err.println("Connection Exception - Couldn't connect to server");
+            //e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Streams Exception");
+            //e.printStackTrace();
         }
     }
 
@@ -65,25 +69,27 @@ public class SocketHandler {
                 break;
         }
         try {
-            //outputStreamWriter.write(String.format("%04d", message.length()));
-            //outputStreamWriter.flush();
-            outputStreamWriter.write(message+"\n");
-            outputStreamWriter.flush();
+            if (outputStreamWriter != null) {
+                outputStreamWriter.write(message + "\n");
+                outputStreamWriter.flush();
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.print("Writing Message Exception: ");
+            //e.printStackTrace();
         }
     }
 
-    public String[] receiveMessage() {
-        String [] data = new String[0];
+    public String[] receiveMessage() throws IOException {
+        String [] data;
+        String line;
 
-        String line="";
-        try {
-            line = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return line.split("\\|");
+        line = br.readLine();
+        if (line == null)
+            throw new IOException();
+
+        data = line.split("\\|");
+
+        return data;
     }
 
     private ArrayList<String> readConfig() {
@@ -104,16 +110,7 @@ public class SocketHandler {
         return data;
     }
 
-    public void closeConnection() throws IOException {
+    public void closeConnection() {
         this.sendMessage("CLOSE_CONNECTION", null);
-        System.out.println("Closing connection");
-        receiver.setRunning(false);
-        //outputStreamWriter.close();
-        //inputStreamReader.close();
-        socket.shutdownOutput();
-        socket.shutdownInput();
-        socket.close();
-        t.interrupt();
     }
-
 }
