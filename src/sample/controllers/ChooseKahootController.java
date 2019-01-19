@@ -46,8 +46,12 @@ public class ChooseKahootController {
             this.warning.setText("Choose room from above");
         else if (pin.length() == 0)
             this.warning.setText("Enter pin");
+        else if (pin.contains("|"))
+            this.warning.setText("Incorrect pin");
         else if (nick.length() == 0)
             this.warning.setText("Enter nick");
+        else if (nick.contains("|"))
+            this.warning.setText("Incorrect nick");
         else
             socketHandler.sendMessage("JOIN_ROOM",parsedRoomId + "|" + pin + "|" + nick + "|");
     }

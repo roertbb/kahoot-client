@@ -21,13 +21,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(event -> {
-            try {
-                socketHandler.closeConnection();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        primaryStage.setOnCloseRequest(event ->
+            socketHandler.closeConnection()
+        );
     }
 
     public static void main(String[] args) {

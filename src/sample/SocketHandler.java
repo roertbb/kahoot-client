@@ -1,30 +1,36 @@
 package sample;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 public class SocketHandler {
     private Socket socket;
     private OutputStreamWriter outputStreamWriter;
     private InputStreamReader inputStreamReader;
+    private BufferedReader br;
     public Receiver receiver;
     private Thread t;
-
-    public InputStreamReader getInputStreamReader() { return this.inputStreamReader; }
 
     SocketHandler() {
         ArrayList<String> server_data = this.readConfig();
         try {
-            socket = new Socket(server_data.get(0),Integer.parseInt(server_data.get(1)));
+            socket = new Socket(server_data.get(0), Integer.parseInt(server_data.get(1)));
             outputStreamWriter = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             inputStreamReader = new InputStreamReader(socket.getInputStream(), "UTF-8");
+            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             receiver = new Receiver();
             this.t = new Thread(receiver);
             this.t.setDaemon(true);
             this.t.start();
+        } catch (ConnectException e) {
+            System.err.println("Connection Exception - Couldn't connect to server");
+            //e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Streams Exception");
+            //e.printStackTrace();
         }
     }
 
@@ -63,28 +69,26 @@ public class SocketHandler {
                 break;
         }
         try {
-            outputStreamWriter.write(String.format("%04d", message.length()));
-            outputStreamWriter.flush();
-            outputStreamWriter.write(message);
-            outputStreamWriter.flush();
+            if (outputStreamWriter != null) {
+                outputStreamWriter.write(message + "\n");
+                outputStreamWriter.flush();
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.print("Writing Message Exception: ");
+            //e.printStackTrace();
         }
     }
 
-    public String[] receiveMessage() {
-        String [] data = new String[0];
-        try {
-            char msgSize[] = new char[4];
-            inputStreamReader.read(msgSize);
-            if (msgSize[0] != 0) {
-                char buffer[] = new char[Integer.parseInt(new String(msgSize))];
-                inputStreamReader.read(buffer);
-                data = String.valueOf(buffer).split("\\|");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String[] receiveMessage() throws IOException {
+        String [] data;
+        String line;
+
+        line = br.readLine();
+        if (line == null)
+            throw new IOException();
+
+        data = line.split("\\|");
+
         return data;
     }
 
@@ -106,16 +110,7 @@ public class SocketHandler {
         return data;
     }
 
-    public void closeConnection() throws IOException {
+    public void closeConnection() {
         this.sendMessage("CLOSE_CONNECTION", null);
-        System.out.println("Closing connection");
-        receiver.setRunning(false);
-        //outputStreamWriter.close();
-        //inputStreamReader.close();
-        socket.shutdownOutput();
-        socket.shutdownInput();
-        socket.close();
-        t.interrupt();
     }
-
 }
