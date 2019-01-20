@@ -112,6 +112,11 @@ public class Receiver implements Runnable {
                             Platform.runLater(() -> lobbyController.ownerDisconnected());
                         }
                     }
+                    // get pin
+                    else if (data[0].equals("15")) {
+                        if (hostLobbyController != null)
+                            Platform.runLater(() -> hostLobbyController.setPin(data));
+                    }
                 }
             }
         } catch(SocketException e) {

@@ -52,8 +52,11 @@ public class HostKahootController {
     }
 
     public void receiveAnswer(String[] data) {
+        for (String s : data)
+            System.out.println(s);
+
         // add notification to log
-        log.getItems().add("User " + data[1] + " answered " + data[2] + " which is " + (data.length > 5 ? "correct" : "incorrect") + " within " + data[3] + " seconds");
+        log.getItems().add("User " + data[1] + " answered " + data[2] + " which is " + (data.length >= 5 ? "correct" : "incorrect") + " within " + data[3] + " seconds");
 
         // refresh list with points if exists
         if (data.length > 4)

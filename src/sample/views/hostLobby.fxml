@@ -9,7 +9,8 @@
 <AnchorPane fx:id="panel" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.HostLobbyController">
    <children>
       <Label layoutX="300.0" layoutY="14.0" text="Lobby" />
-      <ListView fx:id="playersListing" layoutX="20.0" layoutY="38.0" prefHeight="392.0" prefWidth="597.0" />
+      <ListView fx:id="playersListing" layoutX="20.0" layoutY="73.0" prefHeight="357.0" prefWidth="597.0" />
       <Button fx:id="start" layoutX="270.0" layoutY="441.0" mnemonicParsing="false" onAction="#startKahoot" text="Start Kahoot" />
+      <Label fx:id="pin" alignment="CENTER" layoutX="237.0" layoutY="47.0" prefHeight="15.0" prefWidth="166.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>
