@@ -63,6 +63,9 @@ public class SocketHandler {
             case "CHECK_IF_ALREADY_STARTED":
                 message = "13|";
                 break;
+            case "GET_PIN":
+                message = "15|";
+                break;
             default:
                 System.out.println("Unrecognized message");
                 message = "99|Unrecognized message";

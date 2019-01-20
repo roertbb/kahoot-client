@@ -30,6 +30,7 @@ public class CreateKahootController {
     @FXML private Button saveQuestion;
     @FXML private Button saveKahoot;
     @FXML private Button loadKahoot;
+    @FXML private Label error;
 
     private ArrayList<Question> questions = new ArrayList<>();
     int selected = -1;
@@ -39,15 +40,35 @@ public class CreateKahootController {
     @FXML
     public void AddNewQuestion(ActionEvent actionEvent) throws IOException {
         RadioButton selectedToggle = (RadioButton) answer.getSelectedToggle();
-        String correctAnswer = selectedToggle.getText();
-        Question q = new Question(question.getText(),answerA.getText(),answerB.getText(),answerC.getText(),answerD.getText(),correctAnswer,Integer.parseInt(timeForQuestion.getText()));
-        if (selected == -1)
-            questions.add(q);
-        else
-            questions.set(selected,q);
-        questionList.setItems(FXCollections.observableArrayList(questions));
-        clearInputs();
-        saveQuestion.setText("Add Question");
+        String a = answerA.getText();
+        String b = answerB.getText();
+        String c = answerC.getText();
+        String d = answerD.getText();
+        String content = question.getText();
+        String time = timeForQuestion.getText();
+        String correctAnswer = "";
+        if (selectedToggle != null)
+            correctAnswer = selectedToggle.getText();
+
+        if (content.equals("")) {
+            this.error.setText("Fill in question");
+        } else if (a.equals("")|| b.equals("")|| c.equals("")|| d.equals("")) {
+            this.error.setText("Fill in all answers");
+        } else if (correctAnswer.equals("")) {
+            this.error.setText("Fill in correct answer");
+        } else if (!time.matches("([1-9]\\d*)")) {
+            this.error.setText("Enter correct time for question");
+        } else {
+            this.error.setText("");
+            Question q = new Question(content,a,b,c,d,correctAnswer,Integer.parseInt(time));
+            if (selected == -1)
+                questions.add(q);
+            else
+                questions.set(selected,q);
+            questionList.setItems(FXCollections.observableArrayList(questions));
+            clearInputs();
+            saveQuestion.setText("Add Question");
+        }
     }
 
     @FXML
@@ -84,9 +105,14 @@ public class CreateKahootController {
     }
 
     @FXML public void sendKahoot(ActionEvent actionEvent) {
-        List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "#" + question.getAnswerA() + "#"+ question.getAnswerB() + "#"+ question.getAnswerC() + "#"+ question.getAnswerD() + "#"+ question.getCorrectAnswer() + "#"+ question.getTimeForAnswer()).collect(Collectors.toList());
-        socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, "|"));
-        screenManager.setScreen("hostLobby", actionEvent);
+        if (questions.size() > 0) {
+            List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "#" + question.getAnswerA() + "#"+ question.getAnswerB() + "#"+ question.getAnswerC() + "#"+ question.getAnswerD() + "#"+ question.getCorrectAnswer() + "#"+ question.getTimeForAnswer()).collect(Collectors.toList());
+            socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, "|"));
+            screenManager.setScreen("hostLobby", actionEvent);
+        }
+        else {
+            this.error.setText("You need to create at least one question");
+        }
     }
 
     @FXML
