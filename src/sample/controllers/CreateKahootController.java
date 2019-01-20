@@ -1,6 +1,5 @@
 package sample.controllers;
 
-import com.sun.deploy.util.StringUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -107,7 +106,7 @@ public class CreateKahootController {
     @FXML public void sendKahoot(ActionEvent actionEvent) {
         if (questions.size() > 0) {
             List<String> parsedQuestions = questions.stream().map(question -> question.getQuestion() + "#" + question.getAnswerA() + "#"+ question.getAnswerB() + "#"+ question.getAnswerC() + "#"+ question.getAnswerD() + "#"+ question.getCorrectAnswer() + "#"+ question.getTimeForAnswer()).collect(Collectors.toList());
-            socketHandler.sendMessage("SEND_KAHOOT", StringUtils.join(parsedQuestions, "|"));
+            socketHandler.sendMessage("SEND_KAHOOT", String.join("|",parsedQuestions));
             screenManager.setScreen("hostLobby", actionEvent);
         }
         else {

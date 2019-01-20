@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="325269ec-19a7-4b5a-8f59-bb418e8c0cfd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/controllers/CreateKahootController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/controllers/CreateKahootController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/views/createKahoot.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/views/createKahoot.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Receiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="664">
-              <caret line="117" column="83" lean-forward="true" selection-start-line="117" selection-start-column="83" selection-end-line="117" selection-end-column="83" />
+            <state relative-caret-position="622">
+              <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -82,13 +80,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/SocketHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="-8">
+              <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#readConfig#0;class#SocketHandler#0" />
-                <element signature="e#3521#3522#0" expanded="true" />
-                <element signature="e#3579#3580#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,9 +92,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/controllers/CreateKahootController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+            <state relative-caret-position="345">
+              <caret line="108" column="84" selection-start-line="108" selection-start-column="84" selection-end-line="108" selection-end-column="84" />
               <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3531#3532#0" expanded="true" />
                 <element signature="e#3560#3561#0" expanded="true" />
               </folding>
             </state>
@@ -116,19 +113,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
+        <entry file="file://$PROJECT_DIR$/src/sample/controllers/HostKahootController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/event/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="844">
-              <caret line="198" selection-start-line="198" selection-end-line="198" />
+            <state relative-caret-position="482">
+              <caret line="58" column="102" selection-start-line="58" selection-start-column="102" selection-end-line="58" selection-end-column="102" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,24 +127,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/controllers/HostLobbyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state relative-caret-position="330">
+              <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/controllers/KahootController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="103" column="77" selection-start-line="103" selection-start-column="77" selection-end-line="103" selection-end-column="77" />
               <folding>
-                <element signature="e#1421#1422#0" expanded="true" />
-                <element signature="e#1450#1451#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/controllers/HostKahootController.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/controllers/LobbyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="58" column="102" selection-start-line="58" selection-start-column="102" selection-end-line="58" selection-end-column="102" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="157">
+              <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/controllers/MainController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -187,6 +192,7 @@
       <find>REQUEST_ROOM_MEMBERS</find>
       <find>closeConnection</find>
       <find>e.pr</find>
+      <find>utils</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,7 +221,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="993" />
     <option name="y" value="25" />
     <option name="width" value="927" />
@@ -282,6 +288,9 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548001320720" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
@@ -453,7 +462,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129427000" />
+    <option name="totallyTimeSpent" value="129453000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -631,7 +640,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/KahootController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
+        <state relative-caret-position="457">
           <caret line="103" column="77" selection-start-line="103" selection-start-column="77" selection-end-line="103" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -656,8 +665,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -671,7 +680,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/LobbyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="157">
           <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
         </state>
       </provider>
@@ -692,7 +701,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/HostKahootController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
+        <state relative-caret-position="482">
           <caret line="58" column="102" selection-start-line="58" selection-start-column="102" selection-end-line="58" selection-end-column="102" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -702,8 +711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
-          <caret line="117" column="83" lean-forward="true" selection-start-line="117" selection-start-column="83" selection-end-line="117" selection-end-column="83" />
+        <state relative-caret-position="622">
+          <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -737,33 +746,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/HostLobbyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1450#1451#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="330">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/SocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="-8">
+          <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#readConfig#0;class#SocketHandler#0" />
-            <element signature="e#3521#3522#0" expanded="true" />
-            <element signature="e#3579#3580#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controllers/CreateKahootController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="58" column="37" selection-start-line="58" selection-start-column="37" selection-end-line="58" selection-end-column="37" />
+        <state relative-caret-position="345">
+          <caret line="108" column="84" selection-start-line="108" selection-start-column="84" selection-end-line="108" selection-end-column="84" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3531#3532#0" expanded="true" />
             <element signature="e#3560#3561#0" expanded="true" />
           </folding>
         </state>
